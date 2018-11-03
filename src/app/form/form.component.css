@@ -1,0 +1,138 @@
+form {
+    margin-bottom: 0;
+}
+.text-danger {
+    font-weight: 400;
+}
+
+.box-body {
+    padding: 0 8px 0 8px;
+    overflow-x: hidden;
+}
+/* .box-desktop {
+    width: calc(50% - 12px);
+    float: left;
+} */
+.first {
+    margin-right: 24px;
+}
+label {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #888888;
+    display: block;
+}
+
+i {
+    font-size: 18px;
+    color: #27d16b;
+    vertical-align: sub;
+}
+.error {
+    color: #F44337;
+}
+input,
+select {
+    width: 100%;
+    padding: 13px 16px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: solid 1px #e4e6ef;
+    font-size: 16px;
+    color: #474b5b;
+    margin-bottom: 12px;
+}
+.separador {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;      
+}
+.box-input {
+    flex: 0 0 calc(50% - 8px);
+}
+.box-input:nth-of-type(even) {
+    margin-left: 16px;
+}
+
+.footer-bottom {
+    padding: 0px 8px 0 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}    
+
+.footer-bottom p {
+    display: table;
+    position: relative;
+    margin: 0px 30px 0px auto;
+    font-size: 12px;
+    height: 25px;
+    padding-left: 0;
+}
+.footer-bottom p label {
+    color: #474b5b;
+    padding-left: 20px;
+    margin: 0;
+}
+.footer-bottom p label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.footer-bottom p label .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background-color: #eee;
+    border: 1px solid #cccccc;
+}
+.footer-bottom p label .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 9px;
+    top: 2px;
+    width: 8px;
+    height: 15px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.footer-bottom p a {
+    color: #0099ff;
+}
+
+.btn-next {
+    width: 100%;
+    background-color: #0882b7;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.44;
+    color: #ffffff;
+    margin-top: 10px;
+    text-transform: none;
+    white-space: normal;
+    max-width: 200px;
+    height: 52px;
+}
+
+/* .btn-fechar {
+    width: calc(39% - 16px);
+    margin-right: 16px;
+    background-color: transparent;
+    border-radius: 4px;
+    border: solid 1px #0882b7;
+    color: #0882b7 !important;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.44;
+    margin-top: 10px;
+    text-transform: none;
+    white-space: normal;
+} */

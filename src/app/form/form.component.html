@@ -1,3 +1,104 @@
-<p>
-  form works!
-</p>
+<app-header></app-header>
+<div class="row">
+  <div class="container">
+    <form>
+      <div class="box-body">
+        <div class="container-fluid">
+          <div class="box-desktop first">
+            <label>Nome Completo*
+              <i class="material-icons"></i>
+            </label>
+            <input type="text" formControlName="nome" name="nome" id="nome" required>
+            
+            <div class="separador">
+              <div class="box-input">
+                <label for="email">
+                  E-mail*
+                  <i class="material-icons"></i>
+                </label>
+                <input type="email" formControlName="email" name="email" id="email" email required>
+                <span class="text-danger"
+                >E-mail inválido
+              </span>
+            </div>
+            <div class="box-input">
+              <label for="cpf">
+                CPF*
+                <i class="material-icons"></i>
+              </label>
+              <input type="text" required>
+            </div>
+          </div>
+          <div class="separador">
+            <div class="box-input">
+              <label for="telefone"
+              >DDD + Telefone*
+              <i class="material-icons" ></i>
+            </label>
+            <input type="text" required>
+          </div>
+          <div class="box-input">
+            <label >DDD + Telefone 2</label>
+            <input type="text">
+          </div>
+        </div>
+      </div>
+      <div class="box-desktop">
+        <div class="separador">
+          <div class="box-input">
+            <label for="cep">
+              CEP*
+              <i class="material-icons"></i>
+            </label>
+            <input type="text" required>
+          </div>
+          <div class="box-input">
+            <label>
+              Rua*
+              <i class="material-icons"></i>
+            </label>
+            <input type="text" required>
+          </div>
+          <div class="box-input">
+            <label>
+              Número*
+              <i class="material-icons"></i>
+            </label>
+            <input type="number" required>
+          </div>
+          <div class="box-input">
+            <label for="complemento">Complemento</label>
+            <input type="text">
+          </div>
+          <div class="box-input">
+            <label>
+              Estado*
+              <i class="material-icons"></i>
+            </label>
+            <select >
+              <option *ngFor="let estado of estados">{{ estado.nome }}</option>
+            </select>
+          </div>
+          <div class="box-input">
+            <label for="cidade">
+              Cidade*
+              <i class="material-icons"></i>
+            </label>
+            <input type="text"required>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>
+      <label>
+        <input type="checkbox" required>
+      </label>
+      Declaro que estou ciente dos <a href="">Termos de Uso</a><br>
+    </p>
+    <button class="btn btn-next">Próximo passo</button>
+  </div>
+</form>
+</div>
+</div>
