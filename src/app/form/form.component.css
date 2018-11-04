@@ -1,21 +1,22 @@
+
 form {
-    margin-bottom: 0;
+    margin-bottom: 15px;
 }
 .text-danger {
     font-weight: 400;
 }
 
 .box-body {
-    padding: 0 8px 0 8px;
+    padding: 20px 8px 20px 8px;
     overflow-x: hidden;
 }
 /* .box-desktop {
     width: calc(50% - 12px);
     float: left;
 } */
-.first {
+/* .first {
     margin-right: 24px;
-}
+} */
 label {
     font-size: 14px;
     line-height: 1.5;
@@ -57,13 +58,20 @@ select {
 }
 
 .footer-bottom {
-    padding: 0px 8px 0 8px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    padding: 0 24px 24px 24px;
 }    
+@media (min-width: 992px) {
+    .footer-bottom {
+        padding: 0px 8px 0 8px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}
 
-.footer-bottom p {
+
+p {
     display: table;
     position: relative;
     margin: 0px 30px 0px auto;
@@ -71,12 +79,12 @@ select {
     height: 25px;
     padding-left: 0;
 }
-.footer-bottom p label {
+p label {
     color: #474b5b;
     padding-left: 20px;
     margin: 0;
 }
-.footer-bottom p label input {
+p label input {
     position: absolute;
     opacity: 0;
     cursor: pointer;

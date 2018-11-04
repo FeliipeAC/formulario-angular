@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators } from '@angular/forms';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
+import { Subscribe } from '../model/subscribe.model';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 /**
 *
@@ -29,7 +32,18 @@ export class DadosPessoais {
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css'],
-  
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+      style({opacity: 0}),
+      animate(250, style({opacity: 1}))
+    ]),
+    transition(':leave', [   // :leave is alias to '* => void'
+    animate(250, style({opacity: 0}))
+  ])
+])
+]
+
 })
 export class FormComponent implements OnInit {
   
@@ -40,132 +54,155 @@ export class FormComponent implements OnInit {
   maskTelefone: string;
   maskTelefone2: string;
   maskCpf: string;
+  subcribers = [];
   
-  constructor() {
-      
-      this.dadosForm = new FormGroup({
-        nome: new FormControl('', Validators.required),
-        email: new FormControl('', Validators.required),
-        cpf: new FormControl('', [Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
-        cep: new FormControl('', [Validators.required, Validators.minLength(8)]),
-        telefone: new FormControl('', [Validators.required, Validators.minLength(10)]),
-        telefone2: new FormControl(),
-        rua: new FormControl('', Validators.required),
-        numero: new FormControl('', Validators.required),
-        complemento: new FormControl(),
-        estado: new FormControl('', Validators.required),
-        cidade: new FormControl('', Validators.required),
-        termos_de_uso: new FormControl('', Validators.required)
-      });
-      
-      this.estados = [
-        {'nome': 'Acre', 'sigla': 'AC'},
-        {'nome': 'Alagoas', 'sigla': 'AL'},
-        {'nome': 'Amapá', 'sigla': 'AP'},
-        {'nome': 'Amazonas', 'sigla': 'AM'},
-        {'nome': 'Bahia', 'sigla': 'BA'},
-        {'nome': 'Ceará', 'sigla': 'CE'},
-        {'nome': 'Distrito Federal', 'sigla': 'DF'},
-        {'nome': 'Espírito Santo', 'sigla': 'ES'},
-        {'nome': 'Goiás', 'sigla': 'GO'},
-        {'nome': 'Maranhão', 'sigla': 'MA'},
-        {'nome': 'Mato Grosso', 'sigla': 'MT'},
-        {'nome': 'Mato Grosso do Sul', 'sigla': 'MS'},
-        {'nome': 'Minas Gerais', 'sigla': 'MG'},
-        {'nome': 'Pará', 'sigla': 'PA'},
-        {'nome': 'Paraíba', 'sigla': 'PB'},
-        {'nome': 'Paraná', 'sigla': 'PR'},
-        {'nome': 'Pernambuco', 'sigla': 'PE'},
-        {'nome': 'Piauí', 'sigla': 'PI'},
-        {'nome': 'Rio de Janeiro', 'sigla': 'RJ'},
-        {'nome': 'Rio Grande do Norte', 'sigla': 'RN'},
-        {'nome': 'Rio Grande do Sul', 'sigla': 'RS'},
-        {'nome': 'Rondônia', 'sigla': 'RO'},
-        {'nome': 'Roraima', 'sigla': 'RR'},
-        {'nome': 'Santa Catarina', 'sigla': 'SC'},
-        {'nome': 'São Paulo', 'sigla': 'SP'},
-        {'nome': 'Sergipe', 'sigla': 'SE'},
-        {'nome': 'Tocantins', 'sigla': 'TO'}
-      ];
-      
-      this.maskTelefone = this.maskTelefone2 = '(00) 0000-00000';
-      this.maskCpf = '000.000.000-00';
-      // const dados = JSON.parse(sessionStorage.getItem('dadosPessoais'));
-      // if (dados) {
-      //   this.valores(dados);
-      // }
-    }
+  
+  constructor(public snackBar: MatSnackBar) {
     
-    ngOnInit() {
-    }
+    this.dadosForm = new FormGroup({
+      nome: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+      cpf: new FormControl('', [Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
+      cep: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      telefone: new FormControl('', [Validators.required, Validators.minLength(10)]),
+      telefone2: new FormControl(),
+      rua: new FormControl('', Validators.required),
+      numero: new FormControl('', Validators.required),
+      complemento: new FormControl(),
+      estado: new FormControl('', Validators.required),
+      cidade: new FormControl('', Validators.required),
+      // termos_de_uso: new FormControl('', Validators.required)
+    });
     
-    /**
-    * Verifica a quantidade de dígitos para exibir a máscara do cpf
-    */
-    contaCpf(val: number, campo: string) {
-      if (campo === 'cpf') {
-        this.maskCpf = (val === 11) && '000.000.000-00';
-      }
-    }
+    this.estados = [
+      {'nome': 'Acre', 'sigla': 'AC'},
+      {'nome': 'Alagoas', 'sigla': 'AL'},
+      {'nome': 'Amapá', 'sigla': 'AP'},
+      {'nome': 'Amazonas', 'sigla': 'AM'},
+      {'nome': 'Bahia', 'sigla': 'BA'},
+      {'nome': 'Ceará', 'sigla': 'CE'},
+      {'nome': 'Distrito Federal', 'sigla': 'DF'},
+      {'nome': 'Espírito Santo', 'sigla': 'ES'},
+      {'nome': 'Goiás', 'sigla': 'GO'},
+      {'nome': 'Maranhão', 'sigla': 'MA'},
+      {'nome': 'Mato Grosso', 'sigla': 'MT'},
+      {'nome': 'Mato Grosso do Sul', 'sigla': 'MS'},
+      {'nome': 'Minas Gerais', 'sigla': 'MG'},
+      {'nome': 'Pará', 'sigla': 'PA'},
+      {'nome': 'Paraíba', 'sigla': 'PB'},
+      {'nome': 'Paraná', 'sigla': 'PR'},
+      {'nome': 'Pernambuco', 'sigla': 'PE'},
+      {'nome': 'Piauí', 'sigla': 'PI'},
+      {'nome': 'Rio de Janeiro', 'sigla': 'RJ'},
+      {'nome': 'Rio Grande do Norte', 'sigla': 'RN'},
+      {'nome': 'Rio Grande do Sul', 'sigla': 'RS'},
+      {'nome': 'Rondônia', 'sigla': 'RO'},
+      {'nome': 'Roraima', 'sigla': 'RR'},
+      {'nome': 'Santa Catarina', 'sigla': 'SC'},
+      {'nome': 'São Paulo', 'sigla': 'SP'},
+      {'nome': 'Sergipe', 'sigla': 'SE'},
+      {'nome': 'Tocantins', 'sigla': 'TO'}
+    ];
     
-    validaCpf(cpf: string) {
-      let soma = 0;
-      let resto = 0;
-      if ((cpf === '00000000000') || (cpf === '11111111111') || (cpf === '22222222222') || (cpf === '33333333333') ||
-      (cpf === '4444444444') || (cpf === '55555555555') || (cpf === '66666666666') || (cpf === '77777777777') ||
-      (cpf === '88888888888') || (cpf === '99999999999')) {
-        
-      } else {
-        
-        for (let i = 1; i <= 9; i++)  {
-          const aux = (parseInt(cpf.substring(i - 1, i), 10)) * (11 - i);
-          soma += Math.round(aux);
-        }
-        resto = (soma * 10) % 11;
-        
-        if ((resto === 10) || (resto === 11)) {
-          resto = 0;
-        }
-        if (resto !== parseInt(cpf.charAt(9), 10)) {
-          console.log('False');
-        }
-        
-        soma = 0;
-        for (let j = 1; j <= 10; j++) {
-          const aux = (parseInt(cpf.substring(j - 1, j), 10)) * (12 - j);
-          soma += Math.round(aux);
-        }
-        resto = (soma * 10) % 11;
-        
-        if ((resto === 10) || (resto === 11)) {
-          resto = 0;
-        }
-        // console.log('Resto: ', resto);
-        // console.log('Teste: ', parseInt(cpf.substring(10, 11)));
-        if (resto !== parseInt(cpf.charAt(10), 10)) {
-          console.log('False');
-        }
-        // console.log('True');
-      }
-      
-    }
-    /**
-    * Insere dados já preenchidos anteriormente no formulário
-    * @param dados
-    */
-    valores(dados) {
-      if (dados) {
-        this.dadosForm.controls['nome'].setValue(dados.nome);
-        this.dadosForm.controls['email'].setValue(dados.email);
-        this.dadosForm.controls['telefone'].setValue(dados.telefone);
-        this.dadosForm.controls['telefone2'].setValue(dados.telefone2);
-        this.dadosForm.controls['cep'].setValue(dados.cep);
-        this.dadosForm.controls['rua'].setValue(dados.rua);
-        this.dadosForm.controls['numero'].setValue(dados.numero);
-        this.dadosForm.controls['complemento'].setValue(dados.complemento);
-        this.dadosForm.controls['estado'].setValue(dados.estado);
-        this.dadosForm.controls['cidade'].setValue(dados.cidade);
-      }
+    this.maskTelefone = this.maskTelefone2 = '(00) 0000-00000';
+    this.maskCpf = '000.000.000-00';
+    // const dados = JSON.parse(sessionStorage.getItem('dadosPessoais'));
+    // if (dados) {
+    //   this.valores(dados);
+    // }
+  }
+  
+  ngOnInit() {
+  }
+  
+  /**
+  * Verifica a quantidade de dígitos para exibir a máscara do telefone
+  */
+  contaCaracter(val: number, campo: string) {
+    if (campo === 'telefone') {
+      this.maskTelefone = (val < 14) && '(00) 0000-00000' || '(00) 00000-0000';
+    } else {
+      this.maskTelefone2 = (val < 14) && '(00) 0000-00000' || '(00) 00000-0000';
     }
   }
   
+  /**
+  * Verifica a quantidade de dígitos para exibir a máscara do cpf
+  */
+  contaCpf(val: number, campo: string) {
+    if (campo === 'cpf') {
+      this.maskCpf = (val === 11) && '000.000.000-00';
+    }
+  }
+  
+  validaCpf(cpf: string) {
+    let soma = 0;
+    let resto = 0;
+    
+    /**
+    * Verifica se o CPF é dos casos triviais
+    */
+    if ((cpf === '00000000000') || (cpf === '11111111111') || (cpf === '22222222222') || (cpf === '33333333333') ||
+    (cpf === '4444444444') || (cpf === '55555555555') || (cpf === '66666666666') || (cpf === '77777777777') ||
+    (cpf === '88888888888') || (cpf === '99999999999')) {
+      return false;
+    } else {
+      
+      /**
+      * Validação para o primeiro dígito verificador
+      */
+      for (let i = 1; i <= 9; i++)  {
+        const aux = (parseInt(cpf.substring(i - 1, i), 10)) * (11 - i);
+        soma += Math.round(aux);
+      }
+      resto = (soma * 10) % 11;
+      
+      if ((resto === 10) || (resto === 11)) {
+        resto = 0;
+      }
+      if (resto !== parseInt(cpf.charAt(9), 10)) {
+        return false;
+      }
+      
+      soma = 0;
+      
+      /**
+      * Verificação para o segundo dígito verificador
+      */
+      for (let j = 1; j <= 10; j++) {
+        const aux = (parseInt(cpf.substring(j - 1, j), 10)) * (12 - j);
+        soma += Math.round(aux);
+      }
+      resto = (soma * 10) % 11;
+      
+      if ((resto === 10) || (resto === 11)) {
+        resto = 0;
+      }
+      // console.log('Resto: ', resto);
+      // console.log('Teste: ', parseInt(cpf.substring(10, 11)));
+      if (resto !== parseInt(cpf.charAt(10), 10)) {
+        return false;
+      }
+      
+      return true;
+    }
+    
+  }
+  
+  onSubmit() {
+    // this.snackBar.open('Verifique os campos do formulário!', 'Fechar', {
+    //   duration: 2000,
+    // });
+    if (this.checkForm = !this.dadosForm.valid) {
+      this.snackBar.open('Verifique os campos do formulário!', 'Fechar', {
+        duration: 3000,
+      });
+      this.exibiload = false;
+      return false;
+    }
+    this.subcribers.push(new Subscribe(this.dadosForm.value));
+    console.log('Formulário: ', this.subcribers);
+    this.dadosForm.reset();
+    
+  }
+}

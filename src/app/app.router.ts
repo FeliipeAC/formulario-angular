@@ -8,11 +8,11 @@ export const routes = [
         component: HomeComponent
     },
     {
-        path: 'form',
+        path: 'register',
         component: FormComponent
     },
     {
-        path: 'list-form',
+        path: 'subscribers',
         component: ListFormComponent
     }
 ];

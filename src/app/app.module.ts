@@ -8,6 +8,11 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import {RouterModule} from '@angular/router';
 import { routes } from './app.router';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatInputModule, MatSelectModule, MatSnackBarModule, MatDialogModule} from '@angular/material';
+import {NgxMaskModule} from 'ngx-mask';
+import { HttpClientModule } from '@angular/common/http';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -21,7 +26,17 @@ import { CommonModule } from '@angular/common';
   imports: [
     BrowserModule,
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule,
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
+    HttpClientModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+    MatSelectModule,
+    MatInputModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
