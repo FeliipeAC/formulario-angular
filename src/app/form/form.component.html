@@ -32,6 +32,7 @@
               </label>
               <input type="text" #cpf formControlName="cpf" name="cpf" id="cpf" cpf 
               mask="{{maskCpf}}" (keyspress)="contaCpf(cpf.value.length, 'cpf')" required>
+              <span class="text-danger" *ngIf="checkForm && dadosForm.controls['cpf'].invalid">CPF inválido</span>
             </div>
           </div>
           <div class="separador">
@@ -62,7 +63,15 @@
                 <i class="material-icons" *ngIf="checkForm" [ngClass]="{'error':dadosForm.controls['cep'].invalid}" @fadeInOut>
                   {{ (dadosForm.controls['cep'].invalid) && 'close' || 'check' }}</i>
               </label>
-              <input type="text" formControlName="cep" name="cep" id="cep" mask="00000-000" required>
+              <input type="text" formControlName="cep" name="cep" id="cep" mask="00000-000" (blur)="consultaCep()" required>
+            </div>
+            <div class="box-input">
+              <label for="bairro" [ngClass]="{'text-danger':checkForm && dadosForm.controls['bairro'].invalid}">
+                Bairro*
+                <i class="material-icons" *ngIf="checkForm" [ngClass]="{'error':dadosForm.controls['bairro'].invalid} " @fadeInOut>
+                  {{ (dadosForm.controls['bairro'].invalid) && 'close' || 'check' }}</i>
+              </label>
+              <input type="text" formControlName="bairro" name="bairro" id="bairro" required>
             </div>
             <div class="box-input">
               <label for="rua" [ngClass]="{'text-danger':checkForm && dadosForm.controls['rua'].invalid}">
@@ -80,10 +89,14 @@
               </label>
               <input type="number" formControlName="numero" name="numero" id="numero" required>
             </div>
-            <div class="box-input">
-              <label for="complemento">Complemento</label>
-              <input type="text" formControlName="complemento" name="complemento" id="complemento">
-            </div>
+          </div>
+        </div>
+        <div class="box-input">
+            <label for="complemento">Complemento</label>
+            <input type="text" formControlName="complemento" name="complemento" id="complemento">
+          </div>
+        <div class="box-desktop">
+          <div class="separador">
             <div class="box-input">
               <label for="estado" [ngClass]="{'text-danger':checkForm && dadosForm.controls['estado'].invalid}">
                 Estado*
