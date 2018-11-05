@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatSort, MatTableDataSource} from '@angular/material';
+
 
 @Component({
   selector: 'app-list-form',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListFormComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns = ['name', 'email', 'city'];
+  dataSource = [];
+  listaInscritos = [];
 
-  ngOnInit() {
+
+  constructor() {
+    this.listaInscritos = JSON.parse(localStorage.getItem('inscritos'));
+    console.log('Lista: ', this.listaInscritos);
+    this.dataSource = this.listaInscritos;
   }
+  
+    ngOnInit() {
+    
+    }
 
 }

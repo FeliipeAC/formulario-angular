@@ -9,7 +9,7 @@ import {RouterModule} from '@angular/router';
 import { routes } from './app.router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatInputModule, MatSelectModule, MatSnackBarModule, MatDialogModule} from '@angular/material';
+import {MatInputModule, MatSelectModule, MatSnackBarModule, MatDialogModule, MatTableModule, MatTableDataSource, MatSortModule} from '@angular/material';
 import {NgxMaskModule} from 'ngx-mask';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
@@ -36,7 +36,9 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-b
     NoopAnimationsModule,
     MatSelectModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
