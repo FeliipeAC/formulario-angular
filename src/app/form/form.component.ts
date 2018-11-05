@@ -6,6 +6,7 @@ import { Subscribe } from '../model/subscribe.model';
 import {animate, style, transition, trigger} from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs';
+import { EventEmitter } from 'protractor';
 
 /**
 *
@@ -56,9 +57,8 @@ export class FormComponent implements OnInit {
   maskTelefone: string;
   maskTelefone2: string;
   maskCpf: string;
-  subcribers = [];
+  subcribers;
   checkCpf = false;
-  
   
   constructor(public snackBar: MatSnackBar,
               private http: HttpClient) {
@@ -238,7 +238,13 @@ export class FormComponent implements OnInit {
         this.exibiload = false;
         return false;
       }
-      this.subcribers.push(new Subscribe(this.dadosForm.value));
+      this.subcribers = JSON.parse(localStorage.getItem('inscritos'));
+      if (this.subcribers === null) {
+        this.subcribers = {};
+      } 
+      let inscrito = new Subscribe(this.dadosForm.value);
+      this.subcribers.push(inscrito);
+      localStorage.setItem('inscritos', JSON.stringify(this.subcribers));
       console.log('Formulário: ', this.subcribers);
       this.dadosForm.reset();
       
