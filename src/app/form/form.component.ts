@@ -4,9 +4,10 @@ import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import { Subscribe } from '../model/subscribe.model';
 import {animate, style, transition, trigger} from '@angular/animations';
-import { HttpClient } from '@angular/common/http';
 import 'rxjs';
-import { EventEmitter } from 'protractor';
+import { FormService } from './form.service';
+import { HttpClient } from '@angular/common/http';
+
 
 /**
 *
@@ -61,12 +62,13 @@ export class FormComponent implements OnInit {
   checkCpf = false;
   
   constructor(public snackBar: MatSnackBar,
-              private http: HttpClient) {
+    private formService: FormService,
+    private http: HttpClient) {
       
       this.dadosForm = new FormGroup({
         nome: new FormControl('', Validators.required),
         email: new FormControl('', Validators.required),
-        cpf: new FormControl('', [Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
+        cpf: new FormControl('', [Validators.required, Validators.maxLength(11), Validators.minLength(11), FormComponent.validaCpf]),
         telefone: new FormControl('', [Validators.required, Validators.minLength(10)]),
         telefone2: new FormControl(),
         cep: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -141,59 +143,76 @@ export class FormComponent implements OnInit {
     }
     
     /**
-     * Verificar se o CPF é válido
-     * @param control - FormControl do campo CPF
-     */
+    * Verificar se o CPF é válido
+    * @param control - FormControl do campo CPF
+    */
     static validaCpf(control: FormControl) {
-      let soma = 0;
-      let resto = 0;
       const cpf = control.value;
-
+      
       /**
       * Verifica se o CPF é algum caso trivial
       */
-      if ((cpf === '00000000000') || (cpf === '11111111111') || (cpf === '22222222222') || (cpf === '33333333333') ||
-      (cpf === '4444444444') || (cpf === '55555555555') || (cpf === '66666666666') || (cpf === '77777777777') ||
-      (cpf === '88888888888') || (cpf === '99999999999') || (cpf === '')) {
-        return { validaCpf: true }
+      const valida = () => {
+        let soma = 0;
+        let resto = 0;
+
+        if ((cpf === '00000000000') || (cpf === '11111111111') || (cpf === '22222222222') || (cpf === '33333333333') ||
+        (cpf === '4444444444') || (cpf === '55555555555') || (cpf === '66666666666') || (cpf === '77777777777') ||
+        (cpf === '88888888888') || (cpf === '99999999999') || (cpf === '')) {
+          
+          // Inválido
+          return false;
+        } else {
+          
+          /**
+          * Validação para o primeiro dígito verificador
+          */
+          for (let i = 1; i <= 9; i++)  {
+            const aux = (parseInt(cpf.substring(i - 1, i), 10)) * (11 - i);
+            soma += Math.round(aux);
+          }
+          resto = (soma * 10) % 11;
+          
+          if ((resto === 10) || (resto === 11)) {
+            resto = 0;
+          }
+          
+          // Valida primeiro digito
+          if (resto !== parseInt(cpf.charAt(9), 10)) {
+            
+            // Inválido
+            return false;
+          }
+          soma = 0;
+          
+          /**
+          * Verificação para o segundo dígito verificador
+          */
+          for (let j = 1; j <= 10; j++) {
+            const aux = (parseInt(cpf.substring(j - 1, j), 10)) * (12 - j);
+            soma += Math.round(aux);
+          }
+          resto = (soma * 10) % 11;
+          
+          if ((resto === 10) || (resto === 11)) {
+            resto = 0;
+          }
+          
+          // Valida segundo dígito
+          if (resto !== parseInt(cpf.charAt(10), 10)) {
+            
+            // Inválido
+            return false;
+          }
+          
+          // Se cpf for válido
+          return true;
+        }
       }
-      else {
-        
-        /**
-        * Validação para o primeiro dígito verificador
-        */
-        for (let i = 1; i <= 9; i++)  {
-          const aux = (parseInt(cpf.substring(i - 1, i), 10)) * (11 - i);
-          soma += Math.round(aux);
-        }
-        resto = (soma * 10) % 11;
-        
-        if ((resto === 10) || (resto === 11)) {
-          resto = 0;
-        }
-        if (resto !== parseInt(cpf.charAt(9), 10)) {
-          return { validaCpf: true };
-        }
-        soma = 0;
-        
-        /**
-        * Verificação para o segundo dígito verificador
-        */
-        for (let j = 1; j <= 10; j++) {
-          const aux = (parseInt(cpf.substring(j - 1, j), 10)) * (12 - j);
-          soma += Math.round(aux);
-        }
-        resto = (soma * 10) % 11;
-        
-        if ((resto === 10) || (resto === 11)) {
-          resto = 0;
-        }
-        if (resto !== parseInt(cpf.charAt(10), 10)) {
-          return { validaCpf: true };
-        }
-        
-        return { validaCpf: null };
-      }
+      
+      // Retorno do Validator do CPF
+      return valida() ? null : { cpfInvalido: true};
+      
     }
     
     /**
@@ -203,28 +222,29 @@ export class FormComponent implements OnInit {
       
       // Pega o valor do campo CEP
       let cep = this.dadosForm.get('cep').value;
-
+      let dadosCep = null;
       // Pega os dados do endereço pelo CEP no WebService
       this.http.get(`//viacep.com.br/ws/${cep}/json/`)
-      .subscribe(dados => { 
-        // 
+      .subscribe(dados => {
         this.preencheDados(dados);
       });
+      
+      
     }
-
-
+    
+    
     /**
-     * Preenche os campos de endereço obtido através do CEP
-     * @param dados - dados do endereço
-     */
+    * Preenche os campos de endereço obtido através do CEP
+    * @param dados - dados do endereço
+    */
     preencheDados(dados) {
+      console.log('Dados cep: ', dados);
       this.dadosForm.patchValue({
         bairro: dados.bairro,
         rua: dados.logradouro,
         numero: dados.numero,
         cidade: dados.localidade,
         estado: dados.uf
-        
       });
     }
     

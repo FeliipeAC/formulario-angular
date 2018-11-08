@@ -1,21 +1,27 @@
 <app-header></app-header>
-<div class="row home-body">
-  <div class="container">
-      <h1>Aproveite, <span class="font-weight-bold text-danger">inscreva-se já!</span></h1>
-      <p class="text-justify">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vestibulum, felis vel imperdiet dapibus, odio velit tincidunt dui, auctor rhoncus nisi 
-          lorem id nunc. Nam sodales gravida purus, et tincidunt felis malesuada in. Vivamus in euismod urna, ut vestibulum elit. Integer lobortis sem purus, fermentum 
-          cursus diam scelerisque ut. Aliquam viverra, leo sit amet porttitor mollis, orci mi euismod leo, quis condimentum ex urna in nisi. Etiam feugiat ligula sit amet 
-          blandit tempor. Nam at ante lectus. Suspendisse in neque at lorem hendrerit scelerisque id ac quam. Etiam vitae suscipit lectus, vel sodales lectus. Nullam mattis 
-          vitae elit mollis tempor.
-      </p>
-      <p class="text-justify">
-          Vivamus ac neque porta, lacinia justo id, luctus ex. Nunc eget fermentum lectus. Aliquam nunc purus, hendrerit sit amet rutrum at, hendrerit quis nunc. Phasellus 
-          convallis sem nec libero hendrerit sodales. Quisque pellentesque nibh sapien, sit amet molestie libero sagittis in. Cras sit amet pellentesque tellus. Pellentesque 
-          habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque eu sollicitudin arcu, maximus rutrum lorem. Orci varius natoque penatibus 
-          et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum eget lorem feugiat, lobortis felis in, sollicitudin purus. Quisque non ullamcorper arcu. Sed 
-          finibus semper dolor. Integer venenatis auctor volutpat.
-      </p>
-      <button routerLink="/register"type="button" class="btn btn-lg btn-block btn-danger" >Inscrever-me agora!</button>
-  </div>
-</div>
+<!-- <div class="home-body"> -->
+    <div class="content">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="{{ imagem }}" alt="First slide">
+                    <div class="carousel-caption d-md-block stripped">
+                        <h2>Lorem ipsum</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eleifend purus sed justo dictum interdum. 
+                            Aliquam maximus blandit lacinia. Cras et viverra nisi, vel porta.</p>
+                            <button routerLink="/register"type="button" class="btn btn-lg btn-danger" id="inscrever">Inscrever-se agora!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </div>
+            <ngb-carousel>
+                <ng-template ngbSlide>
+                    <img [src]="imagem" alt="Random first slide">
+                    <div class="carousel-caption">
+                        <h3>First slide label</h3>
+                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </div>
+                </ng-template>
+            </ngb-carousel> -->
+        </div>

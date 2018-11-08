@@ -1,3 +1,71 @@
-.container {
-    padding: 15px;
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC|Bungee+Inline|Indie+Flower|Monoton');
+
+/* .content {
+    overflow: hidden;;
+} */
+
+/* .home-container {
+    position: relative;
+} */
+
+#inscrever {
+    /* width: 16em; */
+    font-size: 1rem;
+}
+
+.body-home {
+    position: absolute;
+    top: 25%;
+    left: 12.5%;
+    width: 75%;
+    height: 50%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 21px;
+    border-radius: 4px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-home h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: white;
+    font-family: 'Amatic SC', cursive;
+}
+
+.carousel-caption p {
+    font-family: 'Amatic SC', cursive;
+    font-size: 22px;
+    font-weight: 600;
+}
+.carousel-caption h2 {
+    font-family: 'Bungee Inline', cursive;
+    -webkit-text-stroke: 1px black;
+    color: white;
+    text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+.dotted {
+    padding: 2.25em 1.6875em;
+    background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+    background-image: -moz-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+    background-image: -ms-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+    background-image: repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+    -webkit-background-size: 3px 3px;
+    -moz-background-size: 3px 3px;
+    background-size: 3px 3px;
+}
+
+.stripped {
+    padding: 2.25em 1.6875em;
+    background-image: -webkit-repeating-linear-gradient(135deg, rgba(0,0,0,.3), rgba(0,0,0,.3) 1px, transparent 2px, transparent 2px, rgba(0,0,0,.3) 3px);
+    background-image: -moz-repeating-linear-gradient(135deg, rgba(0,0,0,.3), rgba(0,0,0,.3) 1px, transparent 2px, transparent 2px, rgba(0,0,0,.3) 3px);
+    background-image: -o-repeating-linear-gradient(135deg, rgba(0,0,0,.3), rgba(0,0,0,.3) 1px, transparent 2px, transparent 2px, rgba(0,0,0,.3) 3px);
+    background-image: repeating-linear-gradient(135deg, rgba(0,0,0,.3), rgba(0,0,0,.3) 1px, transparent 2px, transparent 2px, rgba(0,0,0,.3) 3px);
+    -webkit-background-size: 4px 4px;
+    -moz-background-size: 4px 4px;
+    background-size: 4px 4px;
+    border-radius: 4px;
 }

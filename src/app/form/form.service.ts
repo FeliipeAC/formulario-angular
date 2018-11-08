@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
-import { EventEmitter } from 'events';
-import { Subscribe } from '../model/subscribe.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class FormService {
 
-  emitirInscrito = new EventEmitter();
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
-
+  getCep (cep: string) {
+    this.http.get(`//viacep.com.br/ws/${cep}/json/`)
+      .subscribe(dados => { 
+        // 
+        console.log('dados', dados);
+        return dados;
+      });
+  }
 }

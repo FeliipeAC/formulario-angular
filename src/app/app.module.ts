@@ -13,6 +13,8 @@ import {MatInputModule, MatSelectModule, MatSnackBarModule, MatDialogModule, Mat
 import {NgxMaskModule} from 'ngx-mask';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { FormService } from './form/form.service';
+import {NgbCarouselModule, NgbSlide} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -40,7 +42,7 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-b
     MatTableModule,
     MatSortModule
   ],
-  providers: [],
+  providers: [ FormService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
