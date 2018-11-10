@@ -57,37 +57,59 @@ select {
     margin-left: 16px;
 }
 
+/**
+* ################# FORM BOTTOM #################
+*
+*/
+
 .footer-bottom {
     padding: 0 24px 24px 24px;
 }    
 @media (min-width: 992px) {
     .footer-bottom {
-        padding: 0px 8px 0 8px;
+        padding: 0px 8px;
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: space-between;
     }
 }
 
 
-p {
-    display: table;
+.footer-bottom p {
+    display: -webkit-box;
     position: relative;
-    margin: 0px 30px 0px auto;
+    margin: 0 30px 0 15px;
     font-size: 12px;
     height: 25px;
     padding-left: 0;
 }
-p label {
+.footer-bottom p label {
     color: #474b5b;
-    padding-left: 20px;
+    padding-left: 38px;
     margin: 0;
 }
-p label input {
+@media (max-width: 479px) {
+    p label {
+        padding-left: 20px;
+    }
+}
+
+.footer-bottom p label input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
+    width: auto;
+    padding: 0;
+    margin-bottom: 0;
+}
+.footer-bottom p label input:checked ~ .checkmark{
+    border: 0;
+    background-color: #27d16b;
+}
+
+.footer-bottom p label input:checked ~ .checkmark:after {
+    display: block;
 }
 .footer-bottom p label .checkmark {
     position: absolute;

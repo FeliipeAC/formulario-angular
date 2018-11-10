@@ -6,7 +6,7 @@
     </div>
   </div>
   
-  <div class="container col-md-10">
+  <div class="container col-md-8">
     <form [formGroup]="dadosForm" (ngSubmit)="onSubmit()">
       <div class="box-body" [@fadeInOut]>
         <div class="container-fluid">
@@ -117,7 +117,7 @@
                         <div class="box-input">
                           <label for="cidade" [ngClass]="{'text-danger':checkForm && dadosForm.controls['cidade'].invalid}">
                             Cidade*
-                            <i class="material-icons" *ngIf="checkForm" [ngClass]="{'error':dadosForm.controls['cidade'].invalid}" @fadeInOut>
+                            <i class="material-icons" *ngIf="checkForm && dadosForm.controls['cidade'].invalid" [ngClass]="{'error':dadosForm.controls['cidade'].invalid}" @fadeInOut>
                               {{ (dadosForm.controls['cidade'].invalid) && 'close' || 'check' }}</i>
                             </label>
                             <input type="text" formControlName="cidade" name="cidade" id="cidade" required>
@@ -127,6 +127,16 @@
                     </div>
                   </div>
                   <div class="footer-bottom">
+                      <p>
+                          <label>
+                              <input type="checkbox" formControlName="termos_de_uso" name="termos_de_uso" required>
+                              <span class="checkmark"></span>
+                          </label>
+                          Declaro que estou ciente dos <a href="">Termos de Uso</a><br>
+                          <span class="text-danger"
+                                *ngIf="checkForm && dadosForm.controls['termos_de_uso'].invalid">É preciso aceitar os Termos de Uso</span>
+                      </p>
+              
                     <button class="btn btn-next">Cadastrar</button>
                   </div>
                 </form>
