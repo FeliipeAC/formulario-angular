@@ -6,6 +6,7 @@ export class Subscribe {
     telefone: string = null;
     telefone2: string = null;
     cep: string = null;
+    bairro: string = null;
     rua: string = null;
     numero: number = null;
     complemento: string = null;
@@ -20,6 +21,7 @@ export class Subscribe {
         this.telefone = inscrito.telefone;
         this.telefone2 = inscrito.telefone2;
         this.cep = inscrito.cep;
+        this.bairro = inscrito.bairro;
         this.rua = inscrito.rua;
         this.numero = inscrito.numero;
         this.complemento = inscrito.complemento;

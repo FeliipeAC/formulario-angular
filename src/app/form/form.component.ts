@@ -78,7 +78,7 @@ export class FormComponent implements OnInit {
         complemento: new FormControl(),
         estado: new FormControl('', Validators.required),
         cidade: new FormControl('', Validators.required),
-        // termos_de_uso: new FormControl('', Validators.required)
+        termos_de_uso: new FormControl('', Validators.required)
       });
       
       this.estados = [

@@ -1,6 +1,6 @@
 
 form {
-    margin-bottom: 15px;
+    padding-bottom: 15px;
 }
 .text-danger {
     font-weight: 400;
@@ -20,7 +20,7 @@ form {
 label {
     font-size: 14px;
     line-height: 1.5;
-    color: #888888;
+    color: #505050;
     display: block;
 }
 
@@ -53,6 +53,14 @@ select {
 .box-input {
     flex: 0 0 calc(50% - 8px);
 }
+@media (max-width: 767px) {
+    .box-input {
+        flex: 0 0 100%;
+    }
+    .box-input:nth-of-type(even) {
+        margin-left: 0 !important;
+    }
+}
 .box-input:nth-of-type(even) {
     margin-left: 16px;
 }
@@ -63,26 +71,35 @@ select {
 */
 
 .footer-bottom {
-    padding: 0 24px 24px 24px;
+    padding: 0px 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
 }    
-@media (min-width: 992px) {
+@media (max-width: 767px) {
     .footer-bottom {
-        padding: 0px 8px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        padding: 0 24px;
     }
+    .footer-bottom p {
+        margin: 0px 30px 20px 0px !important;
+    }
+}
+
+.container-form {
+    border-radius: 4px;
 }
 
 
 .footer-bottom p {
-    display: -webkit-box;
+    display: -webkit-inline-box;
     position: relative;
     margin: 0 30px 0 15px;
     font-size: 12px;
     height: 25px;
     padding-left: 0;
+    color: #474b5b;
 }
 .footer-bottom p label {
     color: #474b5b;

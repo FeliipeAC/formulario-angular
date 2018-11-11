@@ -1,0 +1,51 @@
+<div class="inscritos-detalhes">
+  <h3>{{ data.obj.nome }}</h3>
+  <div class="dados">
+    <div class="dados-item">
+      <span>Email:</span><br>
+      {{ data.obj.email }}
+    </div>
+    <div class="dados-item">
+      <span>CPF:</span><br>
+      {{ data.obj.cpf }}
+    </div>
+    <div class="dados-item">
+      <span>Telefone:</span><br>
+      {{ data.obj.telefone }}
+    </div>
+  </div>
+  <div class="endereco">
+    <div class="endereco-item">
+      <span>CEP:</span><br>
+      {{ data.obj.cep }}
+    </div>
+    <div class="endereco-item">
+      <span>Bairro:</span><br>
+      {{ data.obj.bairro }}
+    </div>
+    <div class="endereco-item">
+      <span>Rua:</span><br>
+      {{ data.obj.rua }}
+    </div>
+    <div class="endereco-item">
+      <span>Número:</span><br>
+      {{ data.obj.numero }}
+    </div>
+    <div class="endereco-item" *ngIf="data.obj.numero2">
+      <span>Número 2:</span><br>
+      {{ data.obj.numero2 }}
+    </div>
+    <div *ngIf="data.obj.complemento" class="endereco-item">
+      <span>Complemento:</span><br>
+      {{ data.obj.complemento }}
+    </div>
+    <div class="endereco-item">
+      <span>Estado:</span><br>
+      {{ data.obj.estado }}
+    </div>
+    <div class="endereco-item">
+      <span>Cidade:</span><br>
+      {{ data.obj.cidade }}
+    </div>
+  </div>
+</div>

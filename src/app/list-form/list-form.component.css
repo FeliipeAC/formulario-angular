@@ -9,3 +9,11 @@
     overflow: auto;
     max-height: 500px;
   }
+  .mat-cell, .mat-header-cell {
+    color: #505050;
+    text-shadow: none;
+  }
+
+  .btn-detalhes {
+    font-size: 11px;
+  }
