@@ -17,3 +17,7 @@
   .btn-detalhes {
     font-size: 11px;
   }
+  .mat-header-cell {
+    font-size: 14px;
+    font-weight: 600;
+}

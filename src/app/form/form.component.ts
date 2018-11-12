@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
-import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import { Subscribe } from '../model/subscribe.model';
 import {animate, style, transition, trigger} from '@angular/animations';
 import 'rxjs';
-import { FormService } from './form.service';
-import { HttpClient } from '@angular/common/http';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ConsultaCepService } from '../shared/services/consulta-cep.service';
+import {ComponentType} from '@angular/cdk/portal';
+import { ModalConfirmComponent } from '../shared/modal/modal-confirm/modal-confirm.component';
 
 
 /**
@@ -60,10 +61,12 @@ export class FormComponent implements OnInit {
   maskCpf: string;
   subcribers;
   checkCpf = false;
+  component: ComponentType<any>;
+  modal: NgbModalRef;
   
   constructor(public snackBar: MatSnackBar,
-    private formService: FormService,
-    private http: HttpClient) {
+    private cepService: ConsultaCepService,
+    private modalService: NgbModal) {
       
       this.dadosForm = new FormGroup({
         nome: new FormControl('', Validators.required),
@@ -113,10 +116,6 @@ export class FormComponent implements OnInit {
       
       this.maskTelefone = this.maskTelefone2 = '(00) 0000-00000';
       this.maskCpf = '000.000.000-00';
-      // const dados = JSON.parse(sessionStorage.getItem('dadosPessoais'));
-      // if (dados) {
-      //   this.valores(dados);
-      // }
     }
     
     ngOnInit() {
@@ -155,7 +154,7 @@ export class FormComponent implements OnInit {
       const valida = () => {
         let soma = 0;
         let resto = 0;
-
+        
         if ((cpf === '00000000000') || (cpf === '11111111111') || (cpf === '22222222222') || (cpf === '33333333333') ||
         (cpf === '4444444444') || (cpf === '55555555555') || (cpf === '66666666666') || (cpf === '77777777777') ||
         (cpf === '88888888888') || (cpf === '99999999999') || (cpf === '')) {
@@ -224,7 +223,7 @@ export class FormComponent implements OnInit {
       let cep = this.dadosForm.get('cep').value;
       let dadosCep = null;
       // Pega os dados do endereço pelo CEP no WebService
-      this.http.get(`//viacep.com.br/ws/${cep}/json/`)
+      this.cepService.consultaCep(cep)
       .subscribe(dados => {
         this.preencheDados(dados);
       });
@@ -248,6 +247,45 @@ export class FormComponent implements OnInit {
       });
     }
     
+    limpaForm() {
+      this.dadosForm.reset({
+        nome: '',
+        email: '',
+        cpf: '',
+        telefone: '',
+        telefone2: '',
+        cep: '',
+        bairro: '',
+        rua: '',
+        numero: '',
+        complemento: '',
+        estado: '',
+        cidade: '',
+        termos_de_uso: ''
+      });
+    }
+    
+    openModal() {
+      this.component = ModalConfirmComponent;
+      this.modalService.open(this.component, {centered: true});
+    }
+
+    closModal() {
+      this.modal.close();
+    }
+
+    modalConfirmacaoEnvio() {
+      this.component = ModalConfirmComponent;
+      this.modal = this.modalService.open(this.component, {centered: true});
+      // const dialogRef = this.dialog.open(this.component, {
+      //   maxWidth: '85vw',
+      //   data: {obj: elem}
+      // });
+      // dialogRef.beforeClose().subscribe(result => {
+      //   console.log('Modal fechado');
+      // })
+    }
+    
     onSubmit() {
       // this.validaCpf(this.dadosForm.controls['cpf'].value);
       // console.log('Cpf submit: ', this.checkCpf);
@@ -265,8 +303,9 @@ export class FormComponent implements OnInit {
       let inscrito = new Subscribe(this.dadosForm.value);
       this.subcribers.push(inscrito);
       localStorage.setItem('inscritos', JSON.stringify(this.subcribers));
-      console.log('Formulário: ', this.subcribers);
-      this.dadosForm.reset();
+      this.limpaForm();
+      this.modalConfirmacaoEnvio();
+      // this.modalService.open('Cadastro feito com sucesso!', {centered: true});
       
     }
   }

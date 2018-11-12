@@ -14,9 +14,12 @@ import {NgxMaskModule} from 'ngx-mask';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { FormService } from './form/form.service';
-import {NgbCarouselModule, NgbSlide} from '@ng-bootstrap/ng-bootstrap';
+import {NgbCarouselModule, NgbSlide, NgbModal, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import { SubscriberDetailsComponent } from './subscriber-details/subscriber-details.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { ConsultaCepService } from './shared/services/consulta-cep.service';
+import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
+import { ModalConfirmComponent } from './shared/modal/modal-confirm/modal-confirm.component';
 
 
 @NgModule({
@@ -27,7 +30,8 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     ListFormComponent,
     HeaderComponent,
     SubscriberDetailsComponent,
-    FooterComponent
+    FooterComponent,
+    ModalConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -44,12 +48,14 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     MatInputModule,
     MatDialogModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    NgbModalModule
   ],
   entryComponents: [
-    SubscriberDetailsComponent
+    SubscriberDetailsComponent,
+    ModalConfirmComponent
   ],
-  providers: [ FormService ],
+  providers: [ FormService, ConsultaCepService, NgbModalStack ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

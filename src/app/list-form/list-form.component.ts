@@ -33,11 +33,12 @@ export class ListFormComponent implements OnInit {
   ngOnInit() {
     
   }
-  
+
+  /**
+   * Abre moodal com detalhes do inscrito
+   * @param elem - objeto do tipo Subscriber 
+   */
   detalhesCurso(elem) {
-    console.log('Modal: ', elem);
-    // this.nome = elem.nome;
-    // console.log('Nome: ', this.nome);
     this.component = SubscriberDetailsComponent;
     const dialogRef = this.dialog.open(this.component, {
       maxWidth: '85vw',
