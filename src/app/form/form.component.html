@@ -10,7 +10,7 @@
       <div class="box-body" [@fadeInOut]>
         <div class="container-fluid">
           <div class="box-desktop first">
-            <label for="nome" [ngClass]="{'text-danger':checkForm && dadosForm.controls['nome'].invalid}">Nome Completo*
+            <label for="nome" [ngClass]="{'text-danger':checkForm && dadosForm.controls['nome'].invalid}">Nome Completo <span class="text-danger">*</span>
               <i class="material-icons" class="material-icons" *ngIf="checkForm" @fadeInOut
               [ngClass]="{'error':dadosForm.controls['nome'].invalid}">{{ (dadosForm.controls['nome'].invalid)
               && 'close' || 'check'}}</i>
@@ -21,7 +21,7 @@
               <div class="box-input">
                 <label for="email"
                 [ngClass]="{'text-danger':checkForm && dadosForm.controls['email'].invalid}">
-                E-mail*
+                E-mail <span class="text-danger">*</span>
                 <i class="material-icons" *ngIf="checkForm" @fadeInOut
                 [ngClass]="{'error':dadosForm.controls['email'].invalid}">{{ (dadosForm.controls['nome'].invalid)
                 && 'close' || 'check'}}</i>
@@ -30,7 +30,7 @@
             </div>
             <div class="box-input">
               <label for="cpf" [ngClass]="{'text-danger':checkForm && dadosForm.controls['cpf'].invalid}">
-                CPF*
+                CPF <span class="text-danger">*</span>
                 <i class="material-icons" *ngIf="checkForm" @fadeInOut
                 [ngClass]="{'error':dadosForm.controls['cpf'].invalid}">{{
                   (dadosForm.controls['cpf'].invalid)
@@ -44,7 +44,7 @@
             <div class="separador">
               <div class="box-input">
                 <label for="telefone" [ngClass]="{'text-danger':checkForm && dadosForm.controls['telefone'].invalid}">
-                  DDD + Telefone*
+                  DDD + Telefone <span class="text-danger">*</span>
                   <i class="material-icons"*ngIf="checkForm" @fadeInOut
                   [ngClass]="{'error':dadosForm.controls['telefone'].invalid}">{{ (dadosForm.controls['telefone'].invalid) && 'close' || 'check' }}</i>
                 </label>
@@ -65,7 +65,7 @@
             <div class="separador">
               <div class="box-input">
                 <label for="cep" [ngClass]="{'text-danger':checkForm && dadosForm.controls['cep'].invalid}">
-                  CEP*
+                  CEP <span class="text-danger">*</span>
                   <i class="material-icons" *ngIf="checkForm" [ngClass]="{'error':dadosForm.controls['cep'].invalid}" @fadeInOut>
                     {{ (dadosForm.controls['cep'].invalid) && 'close' || 'check' }}</i>
                   </label>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="box-input">
                   <label for="bairro" [ngClass]="{'text-danger':checkForm && dadosForm.controls['bairro'].invalid}">
-                    Bairro*
+                    Bairro <span class="text-danger">*</span>
                     <i class="material-icons" *ngIf="checkForm" [ngClass]="{'error':dadosForm.controls['bairro'].invalid} " @fadeInOut>
                       {{ (dadosForm.controls['bairro'].invalid) && 'close' || 'check' }}</i>
                     </label>
@@ -81,7 +81,7 @@
                   </div>
                   <div class="box-input">
                     <label for="rua" [ngClass]="{'text-danger':checkForm && dadosForm.controls['rua'].invalid}">
-                      Rua*
+                      Rua <span class="text-danger">*</span>
                       <i class="material-icons" *ngIf="checkForm" [ngClass]="{'error':dadosForm.controls['rua'].invalid} " @fadeInOut>
                         {{ (dadosForm.controls['rua'].invalid) && 'close' || 'check' }}</i>
                       </label>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="box-input">
                       <label for="num" [ngClass]="{'text-danger':checkForm && dadosForm.controls['numero'].invalid}">
-                        Número*
+                        Número <span class="text-danger">*</span>
                         <i class="material-icons" *ngIf="checkForm" [ngClass]="{'error':dadosForm.controls['numero'].invalid}" @fadeInOut>
                           {{ (dadosForm.controls['numero'].invalid) && 'close' || 'check' }}</i>
                         </label>
@@ -105,7 +105,7 @@
                     <div class="separador">
                       <div class="box-input">
                         <label for="estado" [ngClass]="{'text-danger':checkForm && dadosForm.controls['estado'].invalid}">
-                          Estado*
+                          Estado <span class="text-danger">*</span>
                           <i class="material-icons" *ngIf="checkForm" [ngClass]="{'error':dadosForm.controls['estado'].invalid}" @fadeInOut>
                             {{ (dadosForm.controls['estado'].invalid) && 'close' || 'check' }}</i>
                           </label>
@@ -115,7 +115,7 @@
                         </div>
                         <div class="box-input">
                           <label for="cidade" [ngClass]="{'text-danger':checkForm && dadosForm.controls['cidade'].invalid}">
-                            Cidade*
+                            Cidade <span class="text-danger">*</span>
                             <i class="material-icons" *ngIf="checkForm && dadosForm.controls['cidade'].invalid" [ngClass]="{'error':dadosForm.controls['cidade'].invalid}" @fadeInOut>
                               {{ (dadosForm.controls['cidade'].invalid) && 'close' || 'check' }}</i>
                             </label>
@@ -125,6 +125,7 @@
                       </div>
                     </div>
                   </div>
+                  <p class="text-dark font-italic text-center">Os campos com <span class="text-danger">*</span> são obrigatórios</p>
                   <div class="footer-bottom">
                     <p>
                       <label>
