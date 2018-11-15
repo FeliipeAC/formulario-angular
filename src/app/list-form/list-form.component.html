@@ -7,25 +7,25 @@
   
   <div class="container bg-light container-form" >
     <div class="example-container">
-      <mat-table #table [dataSource]="dataSource" class="bg-light" [@fadeInOut]>
+      <mat-table #table [dataSource]="dataSource" matSort class="bg-light" [@fadeInOut]>
         
         <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
           
           <!-- Name Column -->
           <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.nome}} </mat-cell>
           </ng-container>
           
           <!-- City Column -->
           <ng-container matColumnDef="city">
-            <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> City </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.cidade}} </mat-cell>
           </ng-container>
           
           <ng-container matColumnDef="detalhes">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
             <mat-cell *matCellDef="let element" class="text-center"> 
               <button class="btn btn-primary btn-detalhes" tabindex="-1" (click)="detalhesCurso(element)" >Ver detalhes</button>
             </mat-cell>
@@ -34,6 +34,8 @@
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
+
+        <mat-paginator [pageSize]="5" showFirstLastButtons></mat-paginator>
       </div>
     </div>
   </div>

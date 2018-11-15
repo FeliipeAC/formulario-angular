@@ -9,7 +9,7 @@ import {RouterModule} from '@angular/router';
 import { routes } from './app.router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatInputModule, MatSelectModule, MatSnackBarModule, MatDialogModule, MatTableModule, MatTableDataSource, MatSortModule, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MatInputModule, MatSelectModule, MatSnackBarModule, MatDialogModule, MatTableModule, MatTableDataSource, MatSortModule, MAT_DIALOG_DATA, MatDialogRef, MatPaginatorModule} from '@angular/material';
 import {NgxMaskModule} from 'ngx-mask';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
@@ -48,7 +48,8 @@ import { ModalConfirmComponent } from './shared/modal/modal-confirm/modal-confir
     MatDialogModule,
     MatTableModule,
     MatSortModule,
-    NgbModalModule
+    NgbModalModule,
+    MatPaginatorModule
   ],
   entryComponents: [
     SubscriberDetailsComponent,

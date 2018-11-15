@@ -1,4 +1,7 @@
 <div class="inscritos-detalhes">
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
   <h3>{{ data.obj.nome }}</h3>
   <div class="dados">
     <div class="dados-item">
@@ -49,4 +52,4 @@
     </div>
   </div>
 </div>
-<button type="button" class="btn btn-danger" tabindex="-1" (click)="closeModal()">Fechar</button>
+<!-- <button type="button" class="btn btn-danger" tabindex="-1" (click)="closeModal()">Fechar</button> -->

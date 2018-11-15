@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, RenderComponentType, Inject } from '@angular/core';
-import {MatSort, MatTableDataSource, MatDialog, MAT_DIALOG_DATA} from '@angular/material';
+import { Component, OnInit, ViewChild, RenderComponentType, Inject, Input } from '@angular/core';
+import {MatSort, MatTableDataSource, MatDialog, MAT_DIALOG_DATA, MatPaginator} from '@angular/material';
 import { SubscriberDetailsComponent } from '../subscriber-details/subscriber-details.component';
 import {ComponentType} from '@angular/cdk/portal';
 import { Subscribe } from '../model/subscribe.model';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {animate, style, transition, trigger} from '@angular/animations';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export interface DialogData {
   obj: Subscribe;
@@ -26,24 +27,46 @@ export interface DialogData {
     ])
   ]
 })
+
+
 export class ListFormComponent implements OnInit {
   
   displayedColumns = ['name', 'city', 'detalhes'];
-  dataSource = [];
-  listaInscritos = [];
+  listaInscritos = JSON.parse(localStorage.getItem('inscritos'));
+  dataSource = new MatTableDataSource(this.listaInscritos);
+  // dataSource: MatTableDataSource<any>;
+  
   component: ComponentType<any>;
   obj: Subscribe;
   
-  
-  constructor(public dialog: MatDialog) {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-    this.listaInscritos = JSON.parse(localStorage.getItem('inscritos'));
-    console.log('Lista: ', this.listaInscritos);
-    this.dataSource = this.listaInscritos;
+  constructor(public dialog: MatDialog) {
+    
   }
   
   ngOnInit() {
+    this.paginator._intl.itemsPerPageLabel = 'Itens por página';
+    this.paginator._intl.nextPageLabel = "Próxima página";
+    this.paginator._intl.previousPageLabel = "Página anterior";
+    this.paginator._intl.lastPageLabel = "Última página";
+    this.paginator._intl.firstPageLabel = "Primeira página";
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  getDados() {
     
+    // this.createTable();
+  }
+
+  createTable() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   /**
