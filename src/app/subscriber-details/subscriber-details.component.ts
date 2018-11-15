@@ -68,7 +68,7 @@ export class SubscriberDetailsComponent implements OnInit {
   mascaraCep (cep: string) {
     const num1 = cep.slice(0,2);
     const num2 = cep.slice(2,5);
-    const num3 = cep.slice(5,7);
+    const num3 = cep.slice(5,8);
     return num1 + '.' + num2 + '-' + num3;
   }
 
