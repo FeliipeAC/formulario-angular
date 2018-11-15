@@ -64,6 +64,12 @@ export class ListFormComponent implements OnInit {
     // this.createTable();
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
   createTable() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

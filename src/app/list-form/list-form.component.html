@@ -7,6 +7,11 @@
   
   <div class="container bg-light container-form" >
     <div class="example-container">
+      <div class="example-header">
+        <mat-form-field class="mat-form-field">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+        </mat-form-field>
+      </div>
       <mat-table #table [dataSource]="dataSource" matSort class="bg-light" [@fadeInOut]>
         
         <!--- Note that these columns can be defined in any order.
@@ -34,7 +39,7 @@
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
-
+        
         <mat-paginator [pageSize]="5" showFirstLastButtons></mat-paginator>
       </div>
     </div>
