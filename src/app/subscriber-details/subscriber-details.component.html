@@ -10,19 +10,23 @@
     </div>
     <div class="dados-item">
       <span>CPF:</span><br>
-      {{ data.obj.cpf }}
+      {{ mascaraCpf(data.obj.cpf) }}
     </div>
     <div class="dados-item">
       <span>Telefone:</span><br>
-      {{ data.obj.telefone }}
+      {{ mascaraTel(data.obj.telefone) }}
+    </div>
+    <div *ngIf="data.obj.telefone2" class="dados-item" >
+      <span>Telefone 2:</span><br>
+      {{ mascaraTel(data.obj.telefone2) }}
     </div>
   </div>
   <div class="endereco">
     <div class="endereco-item">
       <span>CEP:</span><br>
-      {{ data.obj.cep }}
+      {{ mascaraCep(data.obj.cep) }}
     </div>
-    <div class="endereco-item">
+    <div *ngIf="data.obj.bairro" class="endereco-item">
       <span>Bairro:</span><br>
       {{ data.obj.bairro }}
     </div>
@@ -33,10 +37,6 @@
     <div class="endereco-item">
       <span>Número:</span><br>
       {{ data.obj.numero }}
-    </div>
-    <div class="endereco-item" *ngIf="data.obj.numero2">
-      <span>Número 2:</span><br>
-      {{ data.obj.numero2 }}
     </div>
     <div *ngIf="data.obj.complemento" class="endereco-item">
       <span>Complemento:</span><br>
