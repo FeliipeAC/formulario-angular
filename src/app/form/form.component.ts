@@ -8,7 +8,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import {ComponentType} from '@angular/cdk/portal';
 import { ModalConfirmComponent } from '../shared/modal/modal-confirm/modal-confirm.component';
-
+import { Router } from '@angular/router';
 
 /**
 *
@@ -62,11 +62,11 @@ export class FormComponent implements OnInit {
   subcribers;
   checkCpf = false;
   component: ComponentType<any>;
-  modal: NgbModalRef;
   
   constructor(public snackBar: MatSnackBar,
     private cepService: ConsultaCepService,
-    private modalService: NgbModal) {
+    private modal: NgbModal,
+    private route: Router) {
       
       this.dadosForm = new FormGroup({
         nome: new FormControl('', Validators.required),
@@ -116,9 +116,18 @@ export class FormComponent implements OnInit {
       
       this.maskTelefone = this.maskTelefone2 = '(00) 0000-00000';
       this.maskCpf = '000.000.000-00';
+      
     }
     
     ngOnInit() {
+    }
+    
+    openModal() {
+      this.modal.open(ModalConfirmComponent).result.then(result => {
+        if (result === 1) {
+          this.route.navigateByUrl("/subscribers");
+        }
+      });
     }
     
     /**
@@ -265,27 +274,6 @@ export class FormComponent implements OnInit {
       });
     }
     
-    openModal() {
-      this.component = ModalConfirmComponent;
-      this.modalService.open(this.component, {centered: true});
-    }
-
-    closModal() {
-      this.modal.close();
-    }
-
-    modalConfirmacaoEnvio() {
-      this.component = ModalConfirmComponent;
-      this.modal = this.modalService.open(this.component, {centered: true});
-      // const dialogRef = this.dialog.open(this.component, {
-      //   maxWidth: '85vw',
-      //   data: {obj: elem}
-      // });
-      // dialogRef.beforeClose().subscribe(result => {
-      //   console.log('Modal fechado');
-      // })
-    }
-    
     onSubmit() {
       // this.validaCpf(this.dadosForm.controls['cpf'].value);
       // console.log('Cpf submit: ', this.checkCpf);
@@ -304,9 +292,7 @@ export class FormComponent implements OnInit {
       this.subcribers.push(inscrito);
       localStorage.setItem('inscritos', JSON.stringify(this.subcribers));
       this.limpaForm();
-      this.modalConfirmacaoEnvio();
-      // this.modalService.open('Cadastro feito com sucesso!', {centered: true});
-      
+      this.openModal();
     }
   }
   

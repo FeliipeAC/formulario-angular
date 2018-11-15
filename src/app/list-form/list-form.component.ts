@@ -4,6 +4,7 @@ import { SubscriberDetailsComponent } from '../subscriber-details/subscriber-det
 import {ComponentType} from '@angular/cdk/portal';
 import { Subscribe } from '../model/subscribe.model';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 export interface DialogData {
   obj: Subscribe;
@@ -12,7 +13,18 @@ export interface DialogData {
 @Component({
   selector: 'app-list-form',
   templateUrl: './list-form.component.html',
-  styleUrls: ['./list-form.component.css']
+  styleUrls: ['./list-form.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+        style({opacity: 0}),
+        animate(250, style({opacity: 1}))
+      ]),
+      transition(':leave', [   // :leave is alias to '* => void'
+        animate(250, style({opacity: 0}))
+      ]) 
+    ])
+  ]
 })
 export class ListFormComponent implements OnInit {
   

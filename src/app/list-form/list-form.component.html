@@ -1,44 +1,39 @@
-<div class="container container-page-title">
-  <div class="page-title">
-    <h2>Inscritos</h2>
+<div [@fadeInOut]>
+  <div class="container container-page-title">
+    <div class="page-title">
+      <h2>Inscritos</h2>
+    </div>
   </div>
-</div>
-
-<div class="container bg-light container-form">
+  
+  <div class="container bg-light container-form" >
     <div class="example-container">
-        <mat-table #table [dataSource]="dataSource" class="bg-light">
-      
-          <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->
-      
+      <mat-table #table [dataSource]="dataSource" class="bg-light" [@fadeInOut]>
+        
+        <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+          
           <!-- Name Column -->
           <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.nome}} </mat-cell>
           </ng-container>
-      
-          <!-- Email Column -->
-          <!-- <ng-container matColumnDef="email">
-            <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
-          </ng-container> -->
-      
+          
           <!-- City Column -->
           <ng-container matColumnDef="city">
             <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.cidade}} </mat-cell>
           </ng-container>
-
+          
           <ng-container matColumnDef="detalhes">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let element" class="text-center"> 
-              <button class="btn btn-primary btn-detalhes" (click)="detalhesCurso(element)" >Ver detalhes</button>
+              <button class="btn btn-primary btn-detalhes" tabindex="-1" (click)="detalhesCurso(element)" >Ver detalhes</button>
             </mat-cell>
           </ng-container>
-      
+          
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
       </div>
-    
+    </div>
   </div>

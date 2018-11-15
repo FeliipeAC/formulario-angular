@@ -43,7 +43,6 @@ import { ModalConfirmComponent } from './shared/modal/modal-confirm/modal-confir
     HttpClientModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
     MatSelectModule,
     MatInputModule,
     MatDialogModule,
@@ -55,7 +54,14 @@ import { ModalConfirmComponent } from './shared/modal/modal-confirm/modal-confir
     SubscriberDetailsComponent,
     ModalConfirmComponent
   ],
-  providers: [ FormService, ConsultaCepService, NgbModalStack ],
+  exports: [
+    ModalConfirmComponent
+  ],
+  providers: [ 
+    FormService, 
+    ConsultaCepService, 
+    NgbModalStack
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,12 +10,16 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 export class SubscriberDetailsComponent implements OnInit {
 
   
-  constructor(public dialogRef: MatDialogRef<SubscriberDetailsComponent>,
+  constructor(public dialogRef: MatDialogRef<ListFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { 
       console.log('Teste: ', data.obj );
     }
 
   ngOnInit() {
+  }
+
+  closeModal() {
+    this.dialogRef.close();
   }
 
 }
